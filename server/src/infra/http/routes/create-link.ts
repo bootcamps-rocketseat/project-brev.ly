@@ -16,8 +16,8 @@ export const createLinkRoute: FastifyPluginAsyncZod = async server => {
         response: {
           201: zod
             .object({
-              originalUrl: zod.string().describe('The original URL'),
-              shortenedUrl: zod.string().describe('The shortened URL'),
+              originalUrl: zod.url().describe('The original URL'),
+              shortenedUrl: zod.url().describe('The shortened URL'),
             })
             .describe('Link created successfully'),
           400: zod.object({

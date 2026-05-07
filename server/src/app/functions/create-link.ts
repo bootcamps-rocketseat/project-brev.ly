@@ -14,7 +14,7 @@ export const createLink = async (
 
     const linkData = {
       id: uuidv7(),
-      accessCount: '0',
+      accessCount: 0,
       originalUrl,
       shortenedUrl,
       createdAt: new Date(),
