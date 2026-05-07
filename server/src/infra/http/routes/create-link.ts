@@ -1,6 +1,7 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import zod from 'zod'
 import { createLink } from '@/app/functions/create-link'
+import { createLinkInput } from '@/types/create-link'
 
 export const createLinkRoute: FastifyPluginAsyncZod = async server => {
   server.post(
@@ -27,9 +28,17 @@ export const createLinkRoute: FastifyPluginAsyncZod = async server => {
       },
     },
     async (request, reply) => {
+      const { originalUrl, shortenedUrl } = createLinkInput.parse(request.body)
+
+      if (!originalUrl || !shortenedUrl) {
+        return reply
+          .status(400)
+          .send({ message: 'Original URL and shortened URL are required.' })
+      }
+
       const result = await createLink({
-        originalUrl: request.body.originalUrl,
-        shortenedUrl: request.body.shortenedUrl,
+        originalUrl,
+        shortenedUrl,
       })
 
       if (result.left) {

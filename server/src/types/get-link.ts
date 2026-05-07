@@ -1,7 +1,7 @@
 import zod from 'zod'
 
-const getLink = zod.object({
+export const getLinkInput = zod.object({
   id: zod.uuidv7(),
 })
 
-export type GetLinkInput = zod.infer<typeof getLink>
+export type GetLinkInput = zod.infer<typeof getLinkInput>

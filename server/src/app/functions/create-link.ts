@@ -2,7 +2,7 @@ import { uuidv7 } from 'uuidv7'
 import { db } from '@/infra/db'
 import { schema } from '@/infra/db/schemas'
 import { type Either, makeLeft, makeRight } from '@/shared/either'
-import type { CreateLinkInput } from '@/types/create-link'
+import { type CreateLinkInput, createLinkInput } from '@/types/create-link'
 import type { Link } from '@/types/link'
 import type { InvalidFileFormatError } from './errors/invalid-file-format'
 
@@ -10,7 +10,7 @@ export const createLink = async (
   input: CreateLinkInput
 ): Promise<Either<InvalidFileFormatError, Link>> => {
   try {
-    const { originalUrl, shortenedUrl } = input
+    const { originalUrl, shortenedUrl } = createLinkInput.parse(input)
 
     const linkData = {
       id: uuidv7(),

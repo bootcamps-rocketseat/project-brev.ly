@@ -1,6 +1,6 @@
 import zod from 'zod'
 
-const createLinkInput = zod.object({
+export const createLinkInput = zod.object({
   originalUrl: zod.url(),
   shortenedUrl: zod.url(),
 })

@@ -1,7 +1,7 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import zod from 'zod'
 import { deleteLink } from '@/app/functions/delete-link'
-import type { DeleteLinkInput } from '@/types/delete-link'
+import { deleteLinkInput } from '@/types/delete-link'
 
 export const deleteLinkRoute: FastifyPluginAsyncZod = async server => {
   server.delete(
@@ -22,7 +22,7 @@ export const deleteLinkRoute: FastifyPluginAsyncZod = async server => {
       },
     },
     async (request, reply) => {
-      const { id } = request.params as DeleteLinkInput
+      const { id } = deleteLinkInput.parse(request.params)
 
       if (!id) {
         return reply.status(400).send({ message: 'Id is required.' })

@@ -2,13 +2,13 @@ import { eq } from 'drizzle-orm'
 import { db } from '@/infra/db'
 import { schema } from '@/infra/db/schemas'
 import { type Either, makeLeft, makeRight } from '@/shared/either'
-import type { DeleteLinkInput } from '@/types/delete-link'
+import { type DeleteLinkInput, deleteLinkInput } from '@/types/delete-link'
 import type { InvalidFileFormatError } from './errors/invalid-file-format'
 
 export const deleteLink = async (
   input: DeleteLinkInput
 ): Promise<Either<InvalidFileFormatError, { message: string }>> => {
-  const { id } = input
+  const { id } = deleteLinkInput.parse(input)
 
   const result = await db
     .delete(schema.links)

@@ -1,7 +1,7 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import zod from 'zod'
 import { getLink } from '@/app/functions/get-link'
-import type { GetLinkInput } from '@/types/get-link'
+import { getLinkInput } from '@/types/get-link'
 
 export const getLinkRoute: FastifyPluginAsyncZod = async server => {
   server.get(
@@ -37,7 +37,7 @@ export const getLinkRoute: FastifyPluginAsyncZod = async server => {
       },
     },
     async (request, reply) => {
-      const { id } = request.params as GetLinkInput
+      const { id } = getLinkInput.parse(request.params)
 
       if (!id) {
         return reply.status(400).send({ message: 'Id is required.' })
