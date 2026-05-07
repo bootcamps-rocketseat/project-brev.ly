@@ -27,10 +27,6 @@ export const createLinkRoute: FastifyPluginAsyncZod = async server => {
       },
     },
     async (request, reply) => {
-      // if (!createLink) {
-      //   return reply.status(400).send({ message: 'Validation error.' })
-      // }
-
       const result = await createLink({
         originalUrl: request.body.originalUrl,
         shortenedUrl: request.body.shortenedUrl,

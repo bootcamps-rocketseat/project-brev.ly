@@ -7,14 +7,16 @@ import type { Link } from '@/types/link'
 import type { InvalidFileFormatError } from './errors/invalid-file-format'
 
 export const createLink = async (
-  data: CreateLinkInput
+  input: CreateLinkInput
 ): Promise<Either<InvalidFileFormatError, Link>> => {
   try {
+    const { originalUrl, shortenedUrl } = input
+
     const linkData = {
       id: uuidv7(),
       accessCount: '0',
-      originalUrl: data.originalUrl,
-      shortenedUrl: data.shortenedUrl,
+      originalUrl,
+      shortenedUrl,
       createdAt: new Date(),
     } as Link
 

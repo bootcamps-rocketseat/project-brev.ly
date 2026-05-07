@@ -9,6 +9,7 @@ import {
   validatorCompiler,
 } from 'fastify-type-provider-zod'
 import { createLinkRoute } from './routes/create-link'
+import { DeleteLinkRoute } from './routes/delete-link'
 
 const server = fastify({
   logger: true,
@@ -53,6 +54,7 @@ server.register(fastifySwaggerUi, {
 })
 
 server.register(createLinkRoute)
+server.register(DeleteLinkRoute)
 
 server.listen({ port: 3000 }, (_, address: string) => {
   server.log.info(`Server listening at ${address}`)
