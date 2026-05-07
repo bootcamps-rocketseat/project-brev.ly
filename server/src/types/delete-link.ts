@@ -5,3 +5,7 @@ export const deleteLinkInput = zod.object({
 })
 
 export type DeleteLinkInput = zod.infer<typeof deleteLinkInput>
+
+export type DeleteLinkOutput = {
+  message: string
+}

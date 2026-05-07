@@ -12,6 +12,7 @@ import { createLinkRoute } from './routes/create-link'
 import { deleteLinkRoute } from './routes/delete-link'
 import { getLinkRoute } from './routes/get-link'
 import { listLinksRoute } from './routes/list-links'
+import { updateAccessCountLinkRoute } from './routes/update-access-count-link'
 
 const server = fastify({
   logger: true,
@@ -59,6 +60,7 @@ server.register(createLinkRoute)
 server.register(deleteLinkRoute)
 server.register(getLinkRoute)
 server.register(listLinksRoute)
+server.register(updateAccessCountLinkRoute)
 
 server.listen({ port: 3000 }, (_, address: string) => {
   server.log.info(`Server listening at ${address}`)
