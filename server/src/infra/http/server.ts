@@ -8,6 +8,7 @@ import {
   serializerCompiler,
   validatorCompiler,
 } from 'fastify-type-provider-zod'
+import { env } from '@/env'
 import { createLinkRoute } from './routes/create-link'
 import { deleteLinkRoute } from './routes/delete-link'
 import { exportReportLinksRoute } from './routes/export-report-links'
@@ -64,6 +65,6 @@ server.register(listLinksRoute)
 server.register(updateAccessCountLinkRoute)
 server.register(exportReportLinksRoute)
 
-server.listen({ port: 3000 }, (_, address: string) => {
+server.listen({ host: '0.0.0.0', port: env.PORT }, (_, address: string) => {
   server.log.info(`Server listening at ${address}`)
 })
