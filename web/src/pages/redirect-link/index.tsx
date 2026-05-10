@@ -1,8 +1,9 @@
 import { Card } from "@/components/card";
 import { Route } from "@/routes/$shortenedUrl";
 import { useRedirectLink } from "./hooks";
+import { Link } from "@tanstack/react-router";
 
-export const RedirectLink = () => {
+export const RouteRedirectLink = () => {
   const { shortenedUrl } = Route.useParams();
   useRedirectLink(shortenedUrl);
 
@@ -15,9 +16,9 @@ export const RedirectLink = () => {
       </p>
       <p className="text-center text-md text-gray-500 mb-6">
         Não foi redirecionado?
-        <a className="ml-2 text-md text-blue-base underline" href="/">
+        <Link className="ml-2 text-md text-blue-base underline" to="/">
           Acesse aqui
-        </a>
+        </Link>
       </p>
     </Card>
   );

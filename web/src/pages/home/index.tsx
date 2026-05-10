@@ -1,7 +1,7 @@
 import { FormNewLink, ListLinks } from "./components";
 import { useFormNewLink, useListLinks } from "./hooks";
 
-export const Home = () => {
+export const RouteHome = () => {
   const { form, handleSubmit } = useFormNewLink();
   const { isPending, links, deleteLink, copyLink } = useListLinks();
 

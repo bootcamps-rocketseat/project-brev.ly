@@ -15,18 +15,31 @@ export const useRedirectLink = (id: string) => {
   const queryUpdateAccessCount = useQuery({
     queryFn: () => services.links.update(id),
     queryKey: [LinkType.UPDATE_LINK, id],
-    enabled: !!query.data?.data.id,
+    enabled: query.isSuccess && !!query.data?.data.id,
   });
 
   useEffect(() => {
-    if (
-      query.status === "success" &&
-      queryUpdateAccessCount.status === "success"
-    ) {
-      window.location.href = query.data.data.originalUrl;
-      queryClient.invalidateQueries({ queryKey: [LinkType.LIST_LINKS] });
+    if (query.isError) {
+      window.location.replace("/url/not-found");
     }
-  }, [query.status, query.data, queryUpdateAccessCount.status, queryClient]);
+  }, [query.isError]);
+
+  useEffect(() => {
+    if (!query.isSuccess || !queryUpdateAccessCount.isSuccess) {
+      return;
+    }
+
+    queryClient.invalidateQueries({
+      queryKey: [LinkType.LIST_LINKS],
+    });
+
+    window.location.replace(query.data.data.originalUrl);
+  }, [
+    query.data,
+    queryClient,
+    query.isSuccess,
+    queryUpdateAccessCount.isSuccess,
+  ]);
 
   return {
     query,

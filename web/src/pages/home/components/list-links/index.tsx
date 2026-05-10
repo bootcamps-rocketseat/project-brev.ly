@@ -8,6 +8,7 @@ import {
   SpinnerIcon,
   TrashIcon,
 } from "@phosphor-icons/react";
+import { Link as LinkRouter } from "@tanstack/react-router";
 
 type ListLinksProps = {
   links: Array<Link>;
@@ -70,21 +71,21 @@ export const ListLinks = ({
             <div key={item.shortenedUrl}>
               <div className="flex flex-row justify-between gap-3">
                 <div className="flex flex-col min-w-0">
-                  <a
+                  <LinkRouter
                     target="_blank"
-                    href={item.shortenedUrl}
+                    to={item.shortenedUrl}
                     className="text-blue-base text-md truncate md:overflow-visible md:text-clip"
                   >
                     {item.originalUrl}
-                  </a>
+                  </LinkRouter>
 
-                  <a
+                  <LinkRouter
                     target="_blank"
-                    href={item.shortenedUrl}
+                    to={item.shortenedUrl}
                     className="text-gray-500 text-sm truncate mt-2 md:overflow-visible md:text-clip"
                   >
                     {item.shortenedUrl}
-                  </a>
+                  </LinkRouter>
                 </div>
 
                 <div className="flex flex-row items-center shrink-0">
