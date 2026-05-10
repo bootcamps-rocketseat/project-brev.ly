@@ -7,9 +7,14 @@ import { type NewFormLinkData } from "../../hooks/use-form-new-link";
 type FormNewLinkProps = {
   form: UseFormReturn<NewFormLinkData>;
   handleSubmit: (data: NewFormLinkData) => void;
+  isPending: boolean;
 };
 
-export const FormNewLink = ({ form, handleSubmit }: FormNewLinkProps) => {
+export const FormNewLink = ({
+  form,
+  isPending,
+  handleSubmit,
+}: FormNewLinkProps) => {
   return (
     <Card className="h-2/4 md:max-w-md flex flex-col">
       <h1 className="text-gray-600 text-lg">Novo link</h1>
@@ -26,6 +31,7 @@ export const FormNewLink = ({ form, handleSubmit }: FormNewLinkProps) => {
           placeholder="https://www.exemplo.com.br"
           error={!!form.formState.errors.originalUrl}
           errorMessage={form.formState.errors.originalUrl?.message}
+          disabled={isPending}
         />
 
         <Input
@@ -34,9 +40,12 @@ export const FormNewLink = ({ form, handleSubmit }: FormNewLinkProps) => {
           prefix="brev.ly/"
           error={!!form.formState.errors.shortenedUrl}
           errorMessage={form.formState.errors.shortenedUrl?.message}
+          disabled={isPending}
         />
 
-        <Button type="submit">Salvar link</Button>
+        <Button disabled={isPending} type="submit">
+          Salvar link
+        </Button>
       </form>
     </Card>
   );
