@@ -13,9 +13,15 @@ type ListLinksProps = {
   links: Array<Link>;
   isPending: boolean;
   deleteLink: (url: string) => void;
+  copyLink: (url: string) => Promise<void>;
 };
 
-export const ListLinks = ({ links, isPending, deleteLink }: ListLinksProps) => {
+export const ListLinks = ({
+  links,
+  copyLink,
+  isPending,
+  deleteLink,
+}: ListLinksProps) => {
   return (
     <Card className="h-min max-h-150 relative overflow-hidden flex flex-col">
       {isPending && (
@@ -87,7 +93,11 @@ export const ListLinks = ({ links, isPending, deleteLink }: ListLinksProps) => {
                   </p>
 
                   <div className="flex flex-row items-center w-20 gap-1">
-                    <Button disabled={isPending} color="secondary">
+                    <Button
+                      color="secondary"
+                      disabled={isPending}
+                      onClick={() => copyLink(item.shortenedUrl)}
+                    >
                       <CopyIcon size={16} />
                     </Button>
 

@@ -3,7 +3,7 @@ import { useFormNewLink, useListLinks } from "./hooks";
 
 export const Home = () => {
   const { form, handleSubmit } = useFormNewLink();
-  const { isPending, links, deleteLink } = useListLinks();
+  const { isPending, links, deleteLink, copyLink } = useListLinks();
 
   return (
     <div className="flex flex-col gap-10">
@@ -20,6 +20,7 @@ export const Home = () => {
 
         <ListLinks
           links={links}
+          copyLink={copyLink}
           isPending={isPending}
           deleteLink={deleteLink}
         />

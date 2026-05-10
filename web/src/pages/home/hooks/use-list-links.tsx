@@ -2,6 +2,7 @@ import { services } from "@/services";
 import { LinkType, type Link } from "@/types";
 import { formatUrl } from "@/utils/format-url";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 export const useListLinks = () => {
   const queryClient = useQueryClient();
@@ -38,7 +39,24 @@ export const useListLinks = () => {
     }
   };
 
+  const copyLink = async (url: string) => {
+    await navigator.clipboard.writeText(url);
+
+    const formatedUrl = formatUrl(url);
+
+    toast.info(
+      <div className="flex flex-col">
+        <p>Link copiado com sucesso</p>
+        <span>O link {formatedUrl} foi copiado para àrea transferência.</span>
+      </div>,
+      {
+        className: "!bg-blue-100 !text-blue-600",
+      },
+    );
+  };
+
   return {
+    copyLink,
     deleteLink,
     links: query.data?.data?.links as Array<Link>,
     isPending: query.isPending || query.isFetching || mutation.isPending,
