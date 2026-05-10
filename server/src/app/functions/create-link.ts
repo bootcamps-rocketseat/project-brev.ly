@@ -23,7 +23,18 @@ export const createLink = async (
     const [link] = await db.insert(schema.links).values(linkData).returning()
 
     return makeRight(link)
-  } catch (error) {
-    return makeLeft(error as InvalidFileFormatError)
+  } catch (error: unknown) {
+    const cause = error instanceof Error ? error.cause : null
+
+    if (
+      typeof cause === 'object' &&
+      cause !== null &&
+      'code' in cause &&
+      cause.code === '23505'
+    ) {
+      return makeLeft(new Error('Shortened URL already exists'))
+    }
+
+    throw error
   }
 }

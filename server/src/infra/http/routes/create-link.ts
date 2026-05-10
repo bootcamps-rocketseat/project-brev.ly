@@ -42,7 +42,7 @@ export const createLinkRoute: FastifyPluginAsyncZod = async server => {
       })
 
       if (result.left) {
-        return reply.status(400).send({ message: 'Error creating link.' })
+        return reply.status(400).send({ message: result.left.message })
       }
 
       return reply.status(201).send({
