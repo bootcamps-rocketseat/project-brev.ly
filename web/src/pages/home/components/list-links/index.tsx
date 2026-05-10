@@ -12,7 +12,7 @@ import {
 type ListLinksProps = {
   links: Array<Link>;
   isPending: boolean;
-  deleteLink: (id: string) => void;
+  deleteLink: (url: string) => void;
 };
 
 export const ListLinks = ({ links, isPending, deleteLink }: ListLinksProps) => {
@@ -94,7 +94,7 @@ export const ListLinks = ({ links, isPending, deleteLink }: ListLinksProps) => {
                     <Button
                       color="secondary"
                       disabled={isPending}
-                      onClick={() => deleteLink(item.id)}
+                      onClick={() => deleteLink(item.shortenedUrl)}
                     >
                       <TrashIcon size={16} />
                     </Button>

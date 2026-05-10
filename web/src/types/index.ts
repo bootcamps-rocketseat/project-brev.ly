@@ -11,5 +11,7 @@ export type ListLinksOutput = {
 };
 
 export const LinkType = {
+  GET_LINK: "get-link",
   LIST_LINKS: "list-links",
+  UPDATE_LINK: "update-link",
 } as const;
