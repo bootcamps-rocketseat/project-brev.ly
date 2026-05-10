@@ -5,13 +5,15 @@ import { deleteLinkInput } from '@/types/delete-link'
 
 export const deleteLinkRoute: FastifyPluginAsyncZod = async server => {
   server.delete(
-    '/links/:id',
+    '/links/:shortenedUrl',
     {
       schema: {
-        summary: 'Delete a shortened link by ID',
+        summary: 'Delete a shortened link by shortenedUrl',
         tags: ['Links'],
         params: zod.object({
-          id: zod.uuidv7().describe('The ID of the link to delete'),
+          shortenedUrl: zod
+            .string()
+            .describe('The shortenedUrl of the link to delete'),
         }),
         response: {
           204: zod.null().describe('Link deleted successfully'),
@@ -22,13 +24,13 @@ export const deleteLinkRoute: FastifyPluginAsyncZod = async server => {
       },
     },
     async (request, reply) => {
-      const { id } = deleteLinkInput.parse(request.params)
+      const { shortenedUrl } = deleteLinkInput.parse(request.params)
 
-      if (!id) {
-        return reply.status(400).send({ message: 'Id is required.' })
+      if (!shortenedUrl) {
+        return reply.status(400).send({ message: 'ShortenedUrl is required.' })
       }
 
-      const result = await deleteLink({ id })
+      const result = await deleteLink({ shortenedUrl })
 
       if (result.left) {
         return reply.status(400).send({ message: result.left.message })

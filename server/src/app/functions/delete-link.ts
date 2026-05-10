@@ -7,16 +7,19 @@ import {
   type DeleteLinkOutput,
   deleteLinkInput,
 } from '@/types/delete-link'
+import { formatUrl } from '@/utils/format-url'
 import type { InvalidFileFormatError } from './errors/invalid-file-format'
 
 export const deleteLink = async (
   input: DeleteLinkInput
 ): Promise<Either<InvalidFileFormatError, DeleteLinkOutput>> => {
-  const { id } = deleteLinkInput.parse(input)
+  const { shortenedUrl } = deleteLinkInput.parse(input)
+
+  const formatedShortenedUrl = formatUrl(shortenedUrl)
 
   const result = await db
     .delete(schema.links)
-    .where(eq(schema.links.id, id))
+    .where(eq(schema.links.shortenedUrl, formatedShortenedUrl))
     .returning()
 
   if (result.length === 0) {

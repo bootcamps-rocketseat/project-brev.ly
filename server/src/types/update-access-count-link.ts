@@ -1,7 +1,7 @@
 import zod from 'zod'
 
 export const updateAccessCountLinkInput = zod.object({
-  id: zod.uuidv7(),
+  shortenedUrl: zod.string(),
 })
 
 export type UpdateAccessCountLinkInput = zod.infer<

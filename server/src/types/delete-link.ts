@@ -1,7 +1,7 @@
 import zod from 'zod'
 
 export const deleteLinkInput = zod.object({
-  id: zod.uuidv7(),
+  shortenedUrl: zod.string(),
 })
 
 export type DeleteLinkInput = zod.infer<typeof deleteLinkInput>

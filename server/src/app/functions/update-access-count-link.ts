@@ -13,9 +13,9 @@ import { getLink } from './get-link'
 export const updateAccessCountLink = async (
   input: UpdateAccessCountLinkInput
 ): Promise<Either<InvalidFileFormatError, UpdateAccessCountLinkOutput>> => {
-  const { id } = updateAccessCountLinkInput.parse(input)
+  const { shortenedUrl } = updateAccessCountLinkInput.parse(input)
 
-  const linkForUpdate = await getLink({ id })
+  const linkForUpdate = await getLink({ shortenedUrl })
 
   if (linkForUpdate.left) {
     return makeLeft(new Error('Link not found'))
@@ -26,7 +26,7 @@ export const updateAccessCountLink = async (
     .set({
       accessCount: linkForUpdate.right.accessCount + 1,
     })
-    .where(eq(schema.links.id, id))
+    .where(eq(schema.links.shortenedUrl, linkForUpdate.right.shortenedUrl))
     .returning()
 
   if (result.length === 0) {

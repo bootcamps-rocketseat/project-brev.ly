@@ -8,6 +8,7 @@ const envConfig = zod.object({
   CLOUDFLARE_SECRET_ACCESS_KEY: zod.string().default(''),
   CLOUDFLARE_BUCKET: zod.string().default(''),
   CLOUDFLARE_PUBLIC_URL: zod.string().default(''),
+  FRONTEND_URL: zod.string().default(''),
 })
 
 export const env = envConfig.parse(process.env)

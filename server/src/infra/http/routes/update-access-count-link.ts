@@ -5,13 +5,15 @@ import { updateAccessCountLinkInput } from '@/types/update-access-count-link'
 
 export const updateAccessCountLinkRoute: FastifyPluginAsync = async server => {
   server.patch(
-    '/links/:id/access-count',
+    '/links/:shortenedUrl/access-count',
     {
       schema: {
         summary: 'Increment the access count of a shortened link',
         tags: ['Links'],
         params: zod.object({
-          id: zod.uuidv7().describe('The ID of the link to update'),
+          shortenedUrl: zod
+            .string()
+            .describe('The shortenedUrl of the link to update'),
         }),
         response: {
           200: zod.object({
@@ -27,13 +29,13 @@ export const updateAccessCountLinkRoute: FastifyPluginAsync = async server => {
       },
     },
     async (request, reply) => {
-      const { id } = updateAccessCountLinkInput.parse(request.params)
+      const { shortenedUrl } = updateAccessCountLinkInput.parse(request.params)
 
-      if (!id) {
-        return reply.status(400).send({ message: 'Id is required' })
+      if (!shortenedUrl) {
+        return reply.status(400).send({ message: 'ShortenedUrl is required' })
       }
 
-      const result = await updateAccessCountLink({ id })
+      const result = await updateAccessCountLink({ shortenedUrl })
 
       if (result.left) {
         return reply.status(404).send({ message: result.left.message })

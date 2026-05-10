@@ -5,13 +5,15 @@ import { getLinkInput } from '@/types/get-link'
 
 export const getLinkRoute: FastifyPluginAsyncZod = async server => {
   server.get(
-    '/links/:id',
+    '/links/:shortenedUrl',
     {
       schema: {
-        summary: 'Get a shortened link by ID',
+        summary: 'Get a shortened link by shortenedUrl',
         tags: ['Links'],
         params: zod.object({
-          id: zod.uuidv7().describe('The ID of the link to retrieve'),
+          shortenedUrl: zod
+            .string()
+            .describe('The shortenedUrl of the link to retrieve'),
         }),
         response: {
           200: zod
@@ -37,13 +39,13 @@ export const getLinkRoute: FastifyPluginAsyncZod = async server => {
       },
     },
     async (request, reply) => {
-      const { id } = getLinkInput.parse(request.params)
+      const { shortenedUrl } = getLinkInput.parse(request.params)
 
-      if (!id) {
-        return reply.status(400).send({ message: 'Id is required.' })
+      if (!shortenedUrl) {
+        return reply.status(400).send({ message: 'ShortenedUrl is required.' })
       }
 
-      const result = await getLink({ id })
+      const result = await getLink({ shortenedUrl })
 
       if (result.left) {
         return reply.status(404).send({ message: result.left.message })
