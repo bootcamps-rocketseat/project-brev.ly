@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import zod from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { services } from "@/services";
-import { env } from "@/env";
 import { LinkType } from "@/types";
 import type { AxiosError } from "axios";
 import { toast } from "react-toastify";
@@ -64,12 +63,7 @@ export const useFormNewLink = () => {
   });
 
   const handleSubmit = (data: NewFormLinkData) => {
-    const formtedShortenedUrl = `${env.VITE_FRONTEND_URL}/${data.shortenedUrl}`;
-
-    mutation.mutate({
-      ...data,
-      shortenedUrl: formtedShortenedUrl,
-    });
+    mutation.mutate(data);
   };
 
   return {
