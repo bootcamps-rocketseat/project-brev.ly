@@ -1,6 +1,6 @@
 import type { FastifyPluginAsync } from 'fastify'
 import zod from 'zod'
-import { ListLinks } from '@/app/functions/list-links'
+import { listLinks } from '@/app/functions/list-links'
 import { listLinksInput } from '@/types/list-links'
 
 export const listLinksRoute: FastifyPluginAsync = async server => {
@@ -36,7 +36,7 @@ export const listLinksRoute: FastifyPluginAsync = async server => {
     async (request, reply) => {
       const { page, pageSize } = listLinksInput.parse(request.query)
 
-      const result = await ListLinks({ page, pageSize })
+      const result = await listLinks({ page, pageSize })
 
       if (result.left) {
         return reply.status(400).send({ message: result.left.message })

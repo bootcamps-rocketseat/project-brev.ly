@@ -9,6 +9,9 @@ const envConfig = zod.object({
   CLOUDFLARE_BUCKET: zod.string().default(''),
   CLOUDFLARE_PUBLIC_URL: zod.string().default(''),
   FRONTEND_URL: zod.string().default(''),
+  NODE_ENV: zod
+    .enum(['development', 'test', 'production'])
+    .default('production'),
 })
 
 export const env = envConfig.parse(process.env)

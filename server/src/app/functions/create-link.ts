@@ -4,6 +4,7 @@ import { schema } from '@/infra/db/schemas'
 import { type Either, makeLeft, makeRight } from '@/shared/either'
 import { type CreateLinkInput, createLinkInput } from '@/types/create-link'
 import type { Link } from '@/types/link'
+import { formatUrl } from '@/utils/format-url'
 import type { InvalidFileFormatError } from './errors/invalid-file-format'
 
 export const createLink = async (
@@ -11,12 +12,13 @@ export const createLink = async (
 ): Promise<Either<InvalidFileFormatError, Link>> => {
   try {
     const { originalUrl, shortenedUrl } = createLinkInput.parse(input)
+    const formatedShortenedUrl = formatUrl(shortenedUrl)
 
     const linkData = {
       id: uuidv7(),
       accessCount: 0,
       originalUrl,
-      shortenedUrl,
+      shortenedUrl: formatedShortenedUrl,
       createdAt: new Date(),
     } as Link
 
