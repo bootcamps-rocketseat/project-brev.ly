@@ -14,6 +14,8 @@ type ListLinksProps = {
   links: Array<Link>;
   isPending: boolean;
   deleteLink: (url: string) => void;
+  isPendingExportReporLinks: boolean;
+  handleExportReportLinks: () => void;
   copyLink: (url: string) => Promise<void>;
 };
 
@@ -22,6 +24,8 @@ export const ListLinks = ({
   copyLink,
   isPending,
   deleteLink,
+  handleExportReportLinks,
+  isPendingExportReporLinks,
 }: ListLinksProps) => {
   return (
     <Card className="h-min max-h-150 relative overflow-hidden flex flex-col">
@@ -40,9 +44,14 @@ export const ListLinks = ({
           }}
           type="button"
           color="secondary"
-          disabled={isPending}
+          onClick={() => handleExportReportLinks()}
+          disabled={!links?.length || isPending || isPendingExportReporLinks}
         >
-          <DownloadSimpleIcon size={16} />
+          {!isPendingExportReporLinks ? (
+            <DownloadSimpleIcon size={16} />
+          ) : (
+            <SpinnerIcon size={16} className="animate-spin" />
+          )}
           Baixar CSV
         </Button>
       </div>

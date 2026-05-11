@@ -1,5 +1,6 @@
 import { services } from "@/services";
 import { LinkType, type Link } from "@/types";
+import { downloadUrl } from "@/utils/download-url";
 import { formatUrl } from "@/utils/format-url";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
@@ -11,6 +12,17 @@ export const useListLinks = () => {
     queryKey: [LinkType.LIST_LINKS],
     queryFn: () => services.links.list(),
   });
+
+  const mutationExportReportLinks = useMutation({
+    mutationFn: services.links.export,
+    onSuccess: ({ data: { reportUrl } }) => {
+      downloadUrl(reportUrl);
+    },
+  });
+
+  const handleExportReportLinks = () => {
+    mutationExportReportLinks.mutate();
+  };
 
   const mutation = useMutation({
     mutationFn: services.links.delete,
@@ -58,7 +70,9 @@ export const useListLinks = () => {
   return {
     copyLink,
     deleteLink,
+    handleExportReportLinks,
     links: query.data?.data?.links as Array<Link>,
+    isPendingExportReporLinks: mutationExportReportLinks.isPending,
     isPending: query.isPending || query.isFetching || mutation.isPending,
   };
 };

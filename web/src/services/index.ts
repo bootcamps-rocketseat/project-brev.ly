@@ -1,5 +1,5 @@
 import type { NewFormLinkData } from "@/pages/home/hooks/use-form-new-link";
-import type { Link, ListLinksOutput } from "@/types";
+import type { ExportReportLinksOutput, Link, ListLinksOutput } from "@/types";
 import { api } from "./config";
 
 const createLink = async (data: NewFormLinkData) => {
@@ -22,12 +22,17 @@ const updateAccessCountLink = async (shortenedUrl: string) => {
   return await api.patch(`/links/${shortenedUrl}/access-count`);
 };
 
+const exportReportLinks = async () => {
+  return await api.get<ExportReportLinksOutput>("/export-report-links");
+};
+
 export const services = {
   links: {
     get: getLink,
     list: listLinks,
     create: createLink,
     delete: deleteLink,
+    export: exportReportLinks,
     update: updateAccessCountLink,
   },
 };
