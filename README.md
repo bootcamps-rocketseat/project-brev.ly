@@ -9,7 +9,7 @@
     <img alt="Made by" src="https://img.shields.io/badge/made%20by-franciscojunior10-%5965E0">
   </a>
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/bootcamps-rocketseat/project-brev.ly?color=%5965E0">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/bootcamps-rocketseat/project-brev.ly?color=Y65E0">
 
   <a href="https://github.com/bootcamps-rocketseat/project-brev.ly/main">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/bootcamps-rocketseat/project-brev.ly?color=%5965E0">
@@ -19,7 +19,7 @@
     <img alt="Repository issues" src="https://img.shields.io/github/issues/bootcamps-rocketseat/project-brev.ly?color=%5965E0">
   </a>
 
-  <img alt="GitHub" src="https://img.shields.io/github/license/bootcamps-rocketseat/project-brev.ly?color=%5965E0">
+  <img alt="GitHub" src="https://img.shields.io/github/license/bootcamps-rocketseat/project-brev.ly?color=Y65E0=%5965E0">
 
    <a href="https://github.com/bootcamps-rocketseat/project-brev.ly/stargazers">
     <img alt="Stargazers" src="https://img.shields.io/github/stars/bootcamps-rocketseat/project-brev.ly?color=%5965E0">
@@ -30,6 +30,7 @@
   <a href="#sobre-o-projeto-open_file_folder">Sobre o projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#instalação-e-uso-desktop_computer">Instalação e uso</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#tecnologias-hammer_and_wrench">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#funcionalidades-white_check_mark">Funcionalidades</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#licença-memo">Licença</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#autor-man_technologist">Autor</a>
 </p>
@@ -181,6 +182,34 @@ pnpm run dev
 
 - Docker
 - Cloudflare R2
+
+## Funcionalidades :white_check_mark::
+
+**Front-end**:
+
+- [x] Deve ser possível criar um link
+  - [x] Não deve ser possível criar um link com encurtamento mal formatado
+  - [x] Não deve ser possível criar um link com encurtamento já existente
+- [x] Deve ser possível deletar um link
+- [x] Deve ser possível obter a URL original por meio do encurtamento
+- [x] Deve ser possível listar todas as URL’s cadastradas
+- [x] Deve ser possível incrementar a quantidade de acessos de um link
+- [x] Deve ser possível baixar um CSV com o relatório dos links criados
+
+**Back-end**:
+
+- [x] Deve ser possível criar um link
+  - [x] Não deve ser possível criar um link com URL encurtada mal formatada
+  - [x] Não deve ser possível criar um link com URL encurtada já existente
+- [x] Deve ser possível deletar um link
+- [x] Deve ser possível obter a URL original por meio de uma URL encurtada
+- [x] Deve ser possível listar todas as URL’s cadastradas
+- [x] Deve ser possível incrementar a quantidade de acessos de um link
+- [x] Deve ser possível exportar os links criados em um CSV
+  - [x] Deve ser possível acessar o CSV por meio de uma CDN (Amazon S3, Cloudflare R2, etc)
+  - [x] Deve ser gerado um nome aleatório e único para o arquivo
+  - [x] Deve ser possível realizar a listagem de forma performática
+  - [x] O CSV deve ter campos como, URL original, URL encurtada, contagem de acessos e data de criação.
 
 ## Licença :memo::
 
