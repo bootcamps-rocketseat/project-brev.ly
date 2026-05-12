@@ -34,7 +34,7 @@
   <a href="#autor-man_technologist">Autor</a>
 </p>
 
-## Demonstração
+## Demonstração :video_camera::
 
 https://github.com/user-attachments/assets/7ffa78cb-8f76-4f7e-8e38-c8ff2347b17c
 
