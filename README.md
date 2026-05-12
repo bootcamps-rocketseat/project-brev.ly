@@ -1,7 +1,3 @@
-<h1 align="center">
-<img width="162" height="44" alt="Logo" src="https://github.com/user-attachments/assets/d12681a6-1854-4589-ab91-776fba678570" />
-</h1>
-
 <h3 align="center">
   Desafio Prático: Brev.ly
 </h3>
@@ -39,12 +35,6 @@
 </p>
 
 ## Demonstração
-
-<p>
-
-[▶️ Assistir vídeo](https://github.com/user-attachments/assets/7ffa78cb-8f76-4f7e-8e38-c8ff2347b17c)
-
-</p>
 
 https://github.com/user-attachments/assets/7ffa78cb-8f76-4f7e-8e38-c8ff2347b17c
 
@@ -195,8 +185,6 @@ pnpm run dev
 ## Licença :memo::
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
 
 ## Autor :man_technologist::
 
