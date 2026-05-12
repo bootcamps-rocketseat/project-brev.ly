@@ -30,6 +30,7 @@
   <a href="#sobre-o-projeto-open_file_folder">Sobre o projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#instalação-e-uso-desktop_computer">Instalação e uso</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#tecnologias-hammer_and_wrench">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#decisões-arquiteturais-gear">Decisões Arquiteturais</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#funcionalidades-white_check_mark">Funcionalidades</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#licença-memo">Licença</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#autor-man_technologist">Autor</a>
@@ -178,10 +179,85 @@ pnpm run dev
 - Drizzle ORM
 - Zod
 
+**Endpoints**
+| Método | Rota | Descrição |
+| -------- | ------------------------------------ | ---------------------------------------------- |
+| `POST` | `/links` | Criar um novo link encurtado |
+| `GET` | `/links` | Listar todos os links encurtados com paginação |
+| `GET` | `/links/{shortenedUrl}` | Buscar um link encurtado pelo `shortenedUrl` |
+| `DELETE` | `/links/{shortenedUrl}` | Remover um link encurtado pelo `shortenedUrl` |
+| `PATCH` | `/links/{shortenedUrl}/access-count` | Incrementar a contagem de acessos de um link |
+| `GET` | `/export-report-links` | Exportar relatório de links em formato CSV |
+
+**Modelo de dados (links)**
+| Variável | Tipo | Descrição |
+| -------------- | -------------------- | ----------------------------- |
+| `id` | `string (uuid)` | Identificador único do link |
+| `originalUrl` | `string (uri)` | URL original |
+| `shortenedUrl` | `string (uri)` | URL encurtada (letras, números, -, \_) |
+| `accessCount` | `integer` | Quantidade de acessos do link |
+| `createdAt` | `string (date-time)` | Data de criação do link |
+
 **Infraestrutura**
 
 - Docker
 - Cloudflare R2
+
+## Decisões Arquiteturais :gear::
+
+### Uso do `shortenedUrl` como identificador padrão nas operações do backend
+
+O projeto adota o `shortenedUrl` como identificador principal nas operações relacionadas aos links encurtados, como:
+
+- `GET`
+- `DELETE`
+- `PATCH`
+- incremento de acessos (`access-count`)
+- redirecionamentos
+
+### Motivação
+
+Essa abordagem foi escolhida para:
+
+- manter as rotas mais semânticas;
+- evitar exposição de IDs internos do banco;
+- simplificar integração entre frontend e backend;
+- facilitar manutenção e leitura das APIs;
+- garantir consistência entre todas as operações relacionadas aos links.
+
+### Exemplo de padrão adotado
+
+```http
+GET /links/:shortenedUrl
+DELETE /links/:shortenedUrl
+PATCH /links/:shortenedUrl/access-count
+```
+
+### Responsividade e abordagem Mobile First
+
+O projeto foi desenvolvido seguindo a abordagem **Mobile First** utilizando Tailwind CSS.
+
+### O que isso significa
+
+Toda a estrutura visual e estilização foi inicialmente pensada para dispositivos móveis, adicionando adaptações para telas maiores através dos breakpoints do Tailwind.
+
+### Benefícios da abordagem
+
+- melhor experiência em dispositivos móveis;
+- layout mais simples e escalável;
+- menor complexidade de CSS;
+- manutenção facilitada;
+- responsividade padronizada.
+
+### Padrão utilizado
+
+Os estilos base representam o comportamento mobile, enquanto os breakpoints ajustam a interface para tablets e desktops.
+
+### Exemplo
+
+```tsx
+<div className="flex flex-col gap-4 md:flex-row">
+```
 
 ## Funcionalidades :white_check_mark::
 
