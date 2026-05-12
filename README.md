@@ -1,5 +1,5 @@
 <h3 align="center">
-  Desafio Prático: Brev.ly
+  Desafio Prático da Pós Graduação Tech Developer 360: Brev.ly
 </h3>
 
 <p align="center">
@@ -22,7 +22,7 @@
   <img alt="GitHub" src="https://img.shields.io/github/license/bootcamps-rocketseat/project-brev.ly?color=Y65E0=%5965E0">
 
    <a href="https://github.com/bootcamps-rocketseat/project-brev.ly/stargazers">
-    <img alt="Stargazers" src="https://img.shields.io/github/stars/bootcamps-rocketseat/project-brev.ly?color=%5965E0">
+    <img alt="Stargazers" src="https://img.shields.io/github/stars/bootcamps-rocketseat/project-brev.ly?color=Y65E0">
   </a>
 </p>
 
@@ -213,7 +213,7 @@ pnpm run dev
 
 ## Licença :memo::
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENÇA](LICENSE) para obter detalhes.
 
 ## Autor :man_technologist::
 
