@@ -3,18 +3,18 @@ import { LinkType } from "@/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 
-export const useRedirectLink = (id: string) => {
+export const useRedirectLink = (shortenedUrl: string) => {
   const queryClient = useQueryClient();
 
   const query = useQuery({
-    queryFn: () => services.links.get(id),
-    queryKey: [LinkType.GET_LINK, id],
-    enabled: !!id,
+    queryFn: () => services.links.get(shortenedUrl),
+    queryKey: [LinkType.GET_LINK, shortenedUrl],
+    enabled: !!shortenedUrl,
   });
 
   const queryUpdateAccessCount = useQuery({
-    queryFn: () => services.links.update(id),
-    queryKey: [LinkType.UPDATE_LINK, id],
+    queryFn: () => services.links.update(shortenedUrl),
+    queryKey: [LinkType.UPDATE_LINK, shortenedUrl],
     enabled: query.isSuccess && !!query.data?.data.id,
   });
 
