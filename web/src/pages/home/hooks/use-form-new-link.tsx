@@ -11,7 +11,7 @@ const newFormLinkSchema = zod.object({
   originalUrl: zod.url("Informe uma url válida"),
   shortenedUrl: zod
     .string()
-    .min(1)
+    .min(1, "Mínimo 1 caractere.")
     .regex(
       /^[a-zA-Z0-9_-]+$/,
       "Informe uma url minúscula e sem espaço/caracter especial.",

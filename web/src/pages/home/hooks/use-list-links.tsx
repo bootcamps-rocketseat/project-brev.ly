@@ -17,6 +17,7 @@ export const useListLinks = () => {
     mutationFn: services.links.export,
     onSuccess: ({ data: { reportUrl } }) => {
       downloadUrl(reportUrl);
+      alert("Relatório de links baixado com sucesso!");
     },
   });
 
