@@ -35,7 +35,10 @@ server.setErrorHandler((error, _, reply) => {
   return reply.status(500).send({ message: "Internal server error." });
 });
 
-await server.register(fastifyCors, { origin: process.env.FRONTEND_URL || "*" });
+await server.register(fastifyCors, {
+  origin: env.FRONTEND_URL || "*",
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+});
 
 server.register(fastifySwagger, {
   openapi: {
