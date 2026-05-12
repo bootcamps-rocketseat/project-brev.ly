@@ -179,25 +179,6 @@ pnpm run dev
 - Drizzle ORM
 - Zod
 
-**Endpoints**
-| Método | Rota | Descrição |
-| -------- | ------------------------------------ | ---------------------------------------------- |
-| `POST` | `/links` | Criar um novo link encurtado |
-| `GET` | `/links` | Listar todos os links encurtados com paginação |
-| `GET` | `/links/{shortenedUrl}` | Buscar um link encurtado pelo `shortenedUrl` |
-| `DELETE` | `/links/{shortenedUrl}` | Remover um link encurtado pelo `shortenedUrl` |
-| `PATCH` | `/links/{shortenedUrl}/access-count` | Incrementar a contagem de acessos de um link |
-| `GET` | `/export-report-links` | Exportar relatório de links em formato CSV |
-
-**Modelo de dados (links)**
-| Variável | Tipo | Descrição |
-| -------------- | -------------------- | ----------------------------- |
-| `id` | `string (uuid)` | Identificador único do link |
-| `originalUrl` | `string (uri)` | URL original |
-| `shortenedUrl` | `string (uri)` | URL encurtada (letras, números, -, \_) |
-| `accessCount` | `integer` | Quantidade de acessos do link |
-| `createdAt` | `string (date-time)` | Data de criação do link |
-
 **Infraestrutura**
 
 - Docker
@@ -232,6 +213,27 @@ GET /links/:shortenedUrl
 DELETE /links/:shortenedUrl
 PATCH /links/:shortenedUrl/access-count
 ```
+
+### Endpoints
+
+| Método   | Rota                                 | Descrição                                      |
+| -------- | ------------------------------------ | ---------------------------------------------- |
+| `POST`   | `/links`                             | Criar um novo link encurtado                   |
+| `GET`    | `/links`                             | Listar todos os links encurtados com paginação |
+| `GET`    | `/links/{shortenedUrl}`              | Buscar um link encurtado pelo `shortenedUrl`   |
+| `DELETE` | `/links/{shortenedUrl}`              | Remover um link encurtado pelo `shortenedUrl`  |
+| `PATCH`  | `/links/{shortenedUrl}/access-count` | Incrementar a contagem de acessos de um link   |
+| `GET`    | `/export-report-links`               | Exportar relatório de links em formato CSV     |
+
+### Modelo de dados (links)
+
+| Variável       | Tipo                 | Descrição                              |
+| -------------- | -------------------- | -------------------------------------- |
+| `id`           | `string (uuid)`      | Identificador único do link            |
+| `originalUrl`  | `string (uri)`       | URL original                           |
+| `shortenedUrl` | `string (uri)`       | URL encurtada (letras, números, -, \_) |
+| `accessCount`  | `integer`            | Quantidade de acessos do link          |
+| `createdAt`    | `string (date-time)` | Data de criação do link                |
 
 ### Responsividade e abordagem Mobile First
 
